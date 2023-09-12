@@ -35,7 +35,7 @@ fi
 if [ -n "${REMOTE_BRANCH}" ]; then
     print_info "use branch to deploy ${REMOTE_BRANCH}"
 else
-    export REMOTE_BRANCH="master"
+    export REMOTE_BRANCH="pages"
 fi
 
 if [ -n "${GITHUB_TOKEN}" ]; then
