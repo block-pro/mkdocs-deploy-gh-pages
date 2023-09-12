@@ -32,6 +32,12 @@ else
     export CONFIG_FILE="${GITHUB_WORKSPACE}/mkdocs.yml"
 fi
 
+if [ -n "${REMOTE_BRANCH}" ]; then
+    print_info "use branch to deploy ${REMOTE_BRANCH}"
+else
+    export REMOTE_BRANCH="master"
+fi
+
 if [ -n "${GITHUB_TOKEN}" ]; then
     print_info "setup with GITHUB_TOKEN"
     remote_repo="https://x-access-token:${GITHUB_TOKEN}@${GITHUB_DOMAIN:-"github.com"}/${GITHUB_REPOSITORY}.git"
@@ -57,4 +63,4 @@ fi
 git remote rm origin
 git remote add origin "${remote_repo}"
 
-mkdocs gh-deploy --config-file "${CONFIG_FILE}" --force
+mkdocs gh-deploy --config-file "${CONFIG_FILE}" --remote-branch "${REMOTE_BRANCH}" --force 
